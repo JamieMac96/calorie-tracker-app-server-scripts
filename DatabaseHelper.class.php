@@ -25,11 +25,10 @@ class DatabaseHelper{
   public function select($query) {
     $rows = array();
     $result = $this -> query($query);
-	
-	
+
+
     //check if query returns no result / false.
     if($result === false) {
-	echo "no return from query";
         return false;
     }
 
