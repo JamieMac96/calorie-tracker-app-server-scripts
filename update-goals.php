@@ -14,6 +14,17 @@ $response = array();
     $carbPercentage = $db -> quote($_POST['carbPercentage']);
     $proteinPercentage = $db -> quote($_POST['proteinPercentage']);
 
+
+    //If we have already weighed in today or the weight has not changed we do not want to create a new entry.
+    $checkWeightInDateSQL = " SELECT * FROM BodyweightEntry
+                              WHERE User_UserID = $userID
+                              ORDER BY WeighInDate DESC;";
+    $res = $db -> select($checkWeightInDateSQL);
+    if($res[0]['WeighInDate'] == date('Y-m-d') || $res[0]['Weight'] == $bodyweight){
+      $doNotAddNewEntryFlag = true;
+    }
+
+
     $checkSQL = "SELECT * FROM UserDetails WHERE User_UserID = $userID;";
     $checkResult = $db -> select($checkSQL);
 
@@ -24,7 +35,12 @@ $response = array();
               WHERE User_UserID = $userID;";
 
       $updateRes = $db -> query($updateSQL);
-      if($updateRes){
+
+      if(!$doNotAddNewEntryFlag){
+        $newEntry = addNewProgressEntry($bodyweight, $userID);
+      }
+      
+      if($updateRes && ($newEntry || $doNotAddNewEntryFlag)){
         outputTrue();
       }
       else{
@@ -36,14 +52,14 @@ $response = array();
                                 `GoalWeight`, `CalorieGoal`, `ProteinGoalPercent`, `CarbGoalPercent`, `FatGoalPercent`)
                     VALUES ($userID,'$weeklyGoal','$activityLevel',$initialBodyweight,$bodyweight,$goalBodyweight,$calorieGoal,$proteinPercentage,$carbPercentage,$fatPercentage);";
       $insertRes = $db -> query($insertSQL);
-      if($insertRes){
+      $newEntry = addNewProgressEntry($bodyweight, $userID);
+      if($insertRes && $newEntry){
         outputTrue();
       }
       else{
         outputFalse();
       }
     }
-    addNewProgressEntry($bodyweight, $userID);
   }
   else{
     outputFalse();
@@ -56,7 +72,13 @@ $response = array();
 
     $sql = "INSERT INTO `BodyweightEntry`(`EntryID`, `User_UserID`, `Weight`, `WeighInDate`) VALUES (NULL,$userID,$bodyweight,'$currentDate');";
 
-    $db -> query($sql);
+    $res = $db -> query($sql);
+    if($res){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   function outputFalse(){
