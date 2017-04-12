@@ -6,11 +6,12 @@
     include('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
     $db = new DatabaseHelper();
 
-    $userID = $_POST['userID'];
+    $userID = $db -> quote($_POST['userID']);
     $sql = "SELECT * FROM UserDetails WHERE User_UserID = '$userID';";
     $result = $db -> select($sql);
 
     if($result){
+      $userIDFromTable = $result[0]['User_UserID'];
       $weeklyGoal = $result[0]['WeeklyGoal'];
       $activityLevel = $result[0]['ActivityLevel'];
       $initialBodyweight = $result[0]['InitialBodyweight'];
@@ -28,9 +29,10 @@
       $response['bodyweight'] = $bodyweight;
       $response['goalBodyWeight'] = $goalBodyWeight;
       $response['calorieGoal'] = $calorieGoal;
-      $response['fatPercentage'] = $fatPercentage . "%";
-      $response['proteinPercentage'] = $proteinPercentage . "%";
-      $response['carbPercentage'] = $carbPercentage . "%";
+      $response['fatPercentage'] = $fatPercentage;
+      $response['proteinPercentage'] = $proteinPercentage;
+      $response['carbPercentage'] = $carbPercentage;
+      $response['userID'] = $userIDFromTable;
 
       echo json_encode($response, JSON_FORCE_OBJECT);
     }
