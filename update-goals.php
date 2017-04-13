@@ -4,7 +4,6 @@ $response = array();
   if(isset($_POST['userID'])){
     $db = new DatabaseHelper();
     $userID = $db -> quote($_POST['userID']);
-    $initialBodyweight = $db -> quote($_POST['initialBodyweight']);
     $bodyweight = $db -> quote($_POST['bodyweight']);
     $goalBodyweight = $db -> quote($_POST['goalBodyweight']);
     $calorieGoal = $db -> quote($_POST['calorieGoal']);
@@ -39,7 +38,7 @@ $response = array();
       if(!$doNotAddNewEntryFlag){
         $newEntry = addNewProgressEntry($bodyweight, $userID);
       }
-      
+
       if($updateRes && ($newEntry || $doNotAddNewEntryFlag)){
         outputTrue();
       }
@@ -50,7 +49,7 @@ $response = array();
     else{
       $insertSQL = "INSERT INTO `UserDetails`(`User_UserID`, `WeeklyGoal`, `ActivityLevel`, `InitialBodyweight`, `Bodyweight`,
                                 `GoalWeight`, `CalorieGoal`, `ProteinGoalPercent`, `CarbGoalPercent`, `FatGoalPercent`)
-                    VALUES ($userID,'$weeklyGoal','$activityLevel',$initialBodyweight,$bodyweight,$goalBodyweight,$calorieGoal,$proteinPercentage,$carbPercentage,$fatPercentage);";
+                    VALUES ($userID,'$weeklyGoal','$activityLevel',$bodyweight,$bodyweight,$goalBodyweight,$calorieGoal,$proteinPercentage,$carbPercentage,$fatPercentage);";
       $insertRes = $db -> query($insertSQL);
       $newEntry = addNewProgressEntry($bodyweight, $userID);
       if($insertRes && $newEntry){
