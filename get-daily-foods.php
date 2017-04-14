@@ -26,7 +26,7 @@
 
       for($i = 0; $i < sizeof($res); $i++){
         $result[$i] = array($res[$i]['Name'], $res[$i]['Description'] ,
-        $res[$i]['ServingSize'], $res[$i]['NumServings'], $res[$i]['FatPerServing'], $res[$i]['ProteinPerServing'], $res[$i]['CarbPerServing'] );
+        $res[$i]['ServingSize'], $res[$i]['NumServings'], $res[$i]['FatPerServing'], $res[$i]['ProteinPerServing'], $res[$i]['CarbPerServing'], $res[$i]['FoodID'], $res[$i]['GlobalFoodID']);
       }
       $response['result'] = $result;
     }

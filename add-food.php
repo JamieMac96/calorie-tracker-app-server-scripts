@@ -1,6 +1,6 @@
 <?php
   $response = array();
-  $respose['success'] = false;
+  $response['success'] = false;
 
 
   if(isset($_POST['foodID'])){
@@ -36,5 +36,5 @@
   }
 
 
-  echo json_encode($response);
+  echo json_encode($response, JSON_FORCE_OBJECT);
  ?>

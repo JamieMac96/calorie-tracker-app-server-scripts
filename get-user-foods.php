@@ -21,7 +21,7 @@ if(isset($_POST['userID'])){
     $response['success'] = true;
 
     for($i = 0; $i < sizeof($res); $i++){
-      $result[$i] = array($res[$i]['Name'], $res[$i]['Description'], $res[$i]['ServingSize'], $res[$i]['FatPerServing'], $res[$i]['ProteinPerServing'], $res[$i]['CarbPerServing'] );
+      $result[$i] = array($res[$i]['Name'], $res[$i]['Description'], $res[$i]['ServingSize'], $res[$i]['FatPerServing'], $res[$i]['ProteinPerServing'], $res[$i]['CarbPerServing'], $res[$i]['GlobalFoodID']);
     }
     $response['result'] = $result;
   }
