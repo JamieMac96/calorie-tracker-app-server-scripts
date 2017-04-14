@@ -3,6 +3,7 @@
   include_once('/var/www/html/calorie-tracker-app-server-scripts/DateFormatConverter.class.php');
 
   $response = array();
+  $response['success'] = false;
 
   if(isset($_POST['userID'])){
     $db = new DatabaseHelper();
@@ -30,8 +31,6 @@
       echo json_encode($response, JSON_FORCE_OBJECT);
     }
   }
-  else{
-    echo json_encode($response, JSON_FORCE_OBJECT);
-  }
+  echo json_encode($response, JSON_FORCE_OBJECT);
 
  ?>
