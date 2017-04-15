@@ -36,6 +36,11 @@
 
       echo json_encode($response, JSON_FORCE_OBJECT);
     }
+    //on if $result has value false do we want to return false. If it is simply an empty result we return true.
+    else if(sizeof($result) == 0){
+      $response['success'] = true;
+      echo json_encode($response);
+    }
     else{
       $response['success'] = false;
       echo json_encode($response, JSON_FORCE_OBJECT);
