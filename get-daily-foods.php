@@ -10,6 +10,7 @@
     $db = new DatabaseHelper();
 
     $userID = $db -> quote($_POST['userID']);
+    date_default_timezone_set('Europe/Dublin');
     $date = date('Y-m-d');
 
     $dailyFoodsSQL = "SELECT * FROM GlobalFood

@@ -12,7 +12,7 @@ $response = array();
     $fatPercentage = $db -> quote($_POST['fatPercentage']);
     $carbPercentage = $db -> quote($_POST['carbPercentage']);
     $proteinPercentage = $db -> quote($_POST['proteinPercentage']);
-
+    date_default_timezone_set('Europe/Dublin');
 
     //If we have already weighed in today or the weight has not changed we do not want to create a new entry.
     $checkWeightInDateSQL = " SELECT * FROM BodyweightEntry
