@@ -1,5 +1,5 @@
 <?php
-include_once('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
+include_once('/var/www/html/DatabaseHelper.class.php');
 $response = array();
   if(isset($_POST['userID'])){
     $db = new DatabaseHelper();

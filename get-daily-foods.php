@@ -6,7 +6,7 @@
   $response['success'] = false;
 
   if(isset($_POST['userID'])){
-    include('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
+    include('/var/www/html/DatabaseHelper.class.php');
     $db = new DatabaseHelper();
 
     $userID = $db -> quote($_POST['userID']);

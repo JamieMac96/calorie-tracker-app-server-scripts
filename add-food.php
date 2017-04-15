@@ -4,7 +4,7 @@
 
 
   if(isset($_POST['foodID'])){
-    include_once('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
+    include_once('/var/www/html/DatabaseHelper.class.php');
     $db = new DatabaseHelper();
     $globalFoodID = $db -> quote($_POST['foodID']);
     $numServings = $db -> quote($_POST['numServings']);

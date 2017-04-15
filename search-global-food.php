@@ -1,7 +1,7 @@
 <?php
   $response = array();
   if(isset($_POST['searchQuery'])){
-    include('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
+    include('/var/www/html/DatabaseHelper.class.php');
     $db = new DatabaseHelper();
 
     $searchQuery = $db -> quote(htmlentities($_POST['searchQuery']));

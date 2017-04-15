@@ -1,6 +1,6 @@
 <?php
-  include_once('/var/www/html/calorie-tracker-app-server-scripts/DatabaseHelper.class.php');
-  include_once('/var/www/html/calorie-tracker-app-server-scripts/DateFormatConverter.class.php');
+  include_once('/var/www/html/DatabaseHelper.class.php');
+  include_once('/var/www/html/DateFormatConverter.class.php');
 
   $response = array();
   $response['success'] = false;
