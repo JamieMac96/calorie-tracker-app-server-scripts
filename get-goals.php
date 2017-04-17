@@ -39,7 +39,7 @@
     //on if $result has value false do we want to return false. If it is simply an empty result we return true.
     else if(sizeof($result) == 0){
       $response['success'] = true;
-      echo json_encode($response);
+      echo json_encode($response, JSON_FORCE_OBJECT);
     }
     else{
       $response['success'] = false;
